@@ -1,4 +1,12 @@
+/**
+ * @file main.cpp
+ * Drive the program by validating input and creating a CreditCard object
+ * @author Jeremiah Swisher
+ * @date September 2021
+ */
+
 #include <iostream>
+#include "CreditCard.h"
 
 using namespace std;
 int main() {
@@ -7,7 +15,7 @@ int main() {
     infiniteLoop:while (true) {
 
         string userInput = "";
-        string cardNumber = "";
+        string cardNumberIn = "";
 
         cout << "Enter a credit card number to check: ";
         getline(cin,userInput);
@@ -27,16 +35,24 @@ int main() {
                 goto infiniteLoop;
 
             } else if (isdigit(userInput[i])) {
-                cardNumber += userInput[i];
+                cardNumberIn += userInput[i];
             }
         }
 
-        if (cardNumber.length() < 16) {
+        if (cardNumberIn.length() < 16) {
             cout << "You entered too few digits, try that again." << endl;
-        } else if (cardNumber.length() > 16) {
+            continue;
+        } else if (cardNumberIn.length() > 16) {
             cout << "You entered too many digits, try that again." << endl;
+            continue;
+        }
+
+        CreditCard card(cardNumberIn);
+
+        if (card.isValid()) {
+            cout << card.toString() << " is valid." << endl;
         } else {
-            // create credit card object with user supplied number
+            cout << card.toString() << " is invalid." << endl;
         }
     }
 }
