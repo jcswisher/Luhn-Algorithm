@@ -13,30 +13,32 @@ class CreditCard {
 
     private:
         static const int SIZE = 16;
-        int cardNumberArr[SIZE];
+        int cardNumberArr[SIZE] = {};
 
     public:
+
         /**
-         *
-         * @param cardNumber
+         * constructs the CreditCard object with user supplied input
+         * @param cardNumber the user supplied card number (already sanitized in main.cpp)
          */
         CreditCard(string cardNumber);
 
         /**
-         *
-         * @return
+         * uses the luhn algorithm to check whether the card number is valid
+         * @return true if valid, false otherwise
          */
         bool isValid();
 
         /**
-         * converts user's card number to an array with one number in each index
+         * sets each index of the card number array to one number of the user supplied card number
          * @param cardNumber the full 16 digit card number supplied by the user stored as a string
+         * @param cardNumberArr the array which will store the card number
          */
-        void setCardNumberArr(string cardNumber);
+        void setCardNumber(int cardNumberArr[], string cardNumber);
 
         /**
-         *
-         * @return
+         * converts the card number array to a nicely formatted string
+         * @return the card number as a nicely formatted string
          */
         string toString();
 };

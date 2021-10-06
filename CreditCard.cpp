@@ -10,46 +10,39 @@
 
 using namespace std;
 
-/**
- * Constructor which calls setter to
- * @param cardNumber the user supplied card number
- */
+// constructs the CreditCard object with user supplied input
 CreditCard::CreditCard(string cardNumber) {
-    setCardNumberArr(cardNumber);
+    // pass the empty array along with the user supplied card number to the setter
+    setCardNumber(cardNumberArr, cardNumber);
 }
 
-/**
- * Check whether the card number is a valid using the Luhn algorithm
- * @return true if the card number is valid
- */
+// uses the luhn algorithm to check whether the card number is valid
 bool CreditCard::isValid() {
     // luhn algorithm here
     return false;
 }
 
-/**
- * Converts the card number from array to string and formats with a dash every four characters
- * @return the card number
- */
+// sets each index of the card number array to one number of the user supplied card number
+void CreditCard::setCardNumber(int cardNumberArr[], string cardNumber) {
+    // loop through the user supplied card number and put one number from it into the array
+    for (int i = 0; i < cardNumber.length(); i++) {
+        // - '0' will prevent from using the ASCII value of the number instead of the actual number
+        cardNumberArr[i] = cardNumber[i] - '0';
+    }
+}
+
+// converts the card number array to a nicely formatted string with a dash after every four numbers
 string CreditCard::toString() {
     string toReturn = "";
 
+    // loop through the card number array
     for (int i = 0; i < SIZE; i++) {
-        if (i == 4) {
+        // depending on the index, either put one number from the array into toReturn or a dash and then one number
+        if (i == 4 || i == 8 || i == 12) {
             toReturn += "-";
         }
         toReturn += to_string(cardNumberArr[i]);
     }
 
     return toReturn;
-}
-
-/**
- * converts user's card number to an array with one number in each index
- * @param cardNumber the full 16 digit card number supplied by the user stored as a string
- */
-void CreditCard::setCardNumberArr(string cardNumber) {
-    for (int i = 0; i < cardNumber.length(); i++) {
-        cardNumberArr[i] = atoi(&cardNumber[i]);
-    }
 }

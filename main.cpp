@@ -12,10 +12,11 @@ using namespace std;
 int main() {
 
     // ask for credit card numbers until the user says exit
-    infiniteLoop:while (true) {
+    while (true) {
 
         string userInput = "";
         string cardNumberIn = "";
+        bool badInput = false;
 
         cout << "Enter a credit card number to check: ";
         getline(cin,userInput);
@@ -32,27 +33,30 @@ int main() {
                 // the user entered something that's not a digit or a separator like '-' and ' '
                 // tell them of their error and go back to the start of the infinite while loop
                 cout << "You entered something that is not allowed. Try again." << endl;
-                goto infiniteLoop;
+                badInput = true;
+                break;
 
             } else if (isdigit(userInput[i])) {
                 cardNumberIn += userInput[i];
             }
         }
 
-        if (cardNumberIn.length() < 16) {
-            cout << "You entered too few digits, try that again." << endl;
-            continue;
-        } else if (cardNumberIn.length() > 16) {
-            cout << "You entered too many digits, try that again." << endl;
-            continue;
-        }
+        if (!badInput) {
+            if (cardNumberIn.length() < 16) {
+                cout << "You entered too few digits, try that again." << endl;
+                continue;
+            } else if (cardNumberIn.length() > 16) {
+                cout << "You entered too many digits, try that again." << endl;
+                continue;
+            }
 
-        CreditCard card(cardNumberIn);
+            CreditCard card(cardNumberIn);
 
-        if (card.isValid()) {
-            cout << card.toString() << " is valid." << endl;
-        } else {
-            cout << card.toString() << " is invalid." << endl;
+            if (card.isValid()) {
+                cout << card.toString() << " is valid." << endl;
+            } else {
+                cout << card.toString() << " is invalid." << endl;
+            }
         }
     }
 }
