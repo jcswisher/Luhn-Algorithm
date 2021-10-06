@@ -18,8 +18,28 @@ CreditCard::CreditCard(string cardNumber) {
 
 // uses the luhn algorithm to check whether the card number is valid
 bool CreditCard::isValid() {
-    // luhn algorithm here
-    return false;
+    int sum = 0;
+    int checkNum[SIZE] = {};
+
+    for (int i = 0; i < SIZE; i++) {
+        checkNum[i] = cardNumberArr[i];
+    }
+
+    // loop through the card number backwards and step by 2 every time
+    for (int i = SIZE; i > -1; i-=2) {
+        // multiply every other number by 2
+        cardNumberArr[i] = cardNumberArr[i] * 2;
+    }
+
+    for (int i = 0; i < SIZE; i++) {
+        sum += cardNumberArr[i];
+    }
+
+    if (sum % 10 == 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 // sets each index of the card number array to one number of the user supplied card number
