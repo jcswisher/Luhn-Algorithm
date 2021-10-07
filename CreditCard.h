@@ -12,8 +12,8 @@ using namespace std;
 class CreditCard {
 
     private:
-        static const int SIZE = 16;
-        int cardNumberArr[SIZE] = {};
+        static const int SIZE = 16;             // stores the constant size of the card number array
+        int cardNumberArr[SIZE] = {};           // stores each digit of the user supplied card number into an index
 
     public:
 
