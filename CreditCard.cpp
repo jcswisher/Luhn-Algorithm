@@ -41,7 +41,12 @@ bool CreditCard::isValid() {
     // add up all the individual digits by dividing a number by two if that number is greater than 10
     for (int i = 0; i < SIZE; i++) {
         if (checkNum[i] >= 10) {
-            sum += checkNum[i] / 2;
+
+            while (checkNum[i] > 0) {
+                sum += checkNum[i] % 10;
+                checkNum[i] = checkNum[i] / 10;
+            }
+
         } else {
             sum += checkNum[i];
         }
